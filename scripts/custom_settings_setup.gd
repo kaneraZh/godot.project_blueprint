@@ -107,4 +107,8 @@ func _run()->void:
 		TYPE_FLOAT,
 		0.8)
 	
-	ManagerSettings.save_settings()
+	ManagerSettings._save_project_settings(
+		"res://settings.cfg",
+		["custom/","manager/"],
+		[]
+	)
