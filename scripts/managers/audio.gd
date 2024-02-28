@@ -2,20 +2,37 @@
 extends Node
 
 const MUTE_DB:float = -80.0
-func get_bus_volume_normalized(bus_idx:int):
+static func get_bus_volume_normalized(bus_idx:int):
 	assert(AudioServer.get_bus_count()>bus_idx, "<bus_idx:%s> solicited is out of range"%bus_idx)
 	return pow(2.0, AudioServer.get_bus_volume_db(bus_idx) / 10.0)
-func set_bus_volume_normalized(bus_idx:int, volume:float):
+static func set_bus_volume_normalized(bus_idx:int, volume:float):
 	assert(AudioServer.get_bus_count()>bus_idx, "<bus_idx:%s> solicited is out of range"%bus_idx)
 	var vol:float = log(volume)*10.0 / log(2.0)
 	AudioServer.set_bus_volume_db(bus_idx, vol if (vol>MUTE_DB) else MUTE_DB)
 
 func _init():
 	set_process_mode(Node.PROCESS_MODE_ALWAYS)
+	ProjectSettings.connect(&"settings_changed", Callable(self, &"_on_project_settings_update"), CONNECT_DEFERRED)
+static func _on_project_settings_update():
+	if(ProjectSettings.has_setting("custom/audio/master/volume_normalized")):
+		set_bus_volume_normalized(
+			AudioServer.get_bus_index(&"master"),
+			ProjectSettings.get_setting("custom/audio/master/volume_normalized")
+		)
+	if(ProjectSettings.has_setting("custom/audio/sfx/volume_normalized")):
+		set_bus_volume_normalized(
+			AudioServer.get_bus_index(&"sfx"),
+			ProjectSettings.get_setting("custom/audio/sfx/volume_normalized")
+		)
+	if(ProjectSettings.has_setting("custom/audio/music/volume_normalized")):
+		set_bus_volume_normalized(
+			AudioServer.get_bus_index(&"music"),
+			ProjectSettings.get_setting("custom/audio/music/volume_normalized")
+		)
 
-var _player:MusicPlayer : get=get_player, set=set_player
+var _player:MusicPlayer : get=get_player, set=_set_player
 func get_player()->MusicPlayer: return _player
-func set_player(player:MusicPlayer)->void:
+func _set_player(player:MusicPlayer)->void:
 	_player = player
 	_player.set_bus(&"music")
 var _track:AudioStream : set=_set_track_current, get=get_track_current
@@ -25,6 +42,7 @@ func _set_track_current(m:AudioStream)->void:
 	_player.set_stream(_track)
 func is_fading()->bool:	return _player.is_fading()
 func play(time:float)->void:
+	assert(_track!=null, "<_track> is <null>")
 	_player.connect(&"fade_start", Callable(_player, &"set_stream_paused").bind(true), CONNECT_ONE_SHOT)
 	_player.fade_in(time)
 func pause(time:float)->void:

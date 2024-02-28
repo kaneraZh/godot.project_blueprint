@@ -66,46 +66,40 @@ class ProjectVariable:
 		res.hint		= hint
 		res.hint_string	= hint_string
 		res.make()
+
 func _run()->void:
+	
 	# MANAGER SETTINGS
-	ProjectVariable.create_setting(
-		"manager/settings/settings/directory",
+	ProjectVariable.create_setting("manager/settings/settings/directory",
 		TYPE_STRING,
 		"user://settings.cfg")
-	ProjectVariable.create_setting(
-		"manager/settings/settings/include",
+	ProjectVariable.create_setting("manager/settings/settings/include",
 		TYPE_PACKED_STRING_ARRAY,
 		PackedStringArray(["custom/", "manager/", "input/"]))
-	ProjectVariable.create_setting(
-		"manager/settings/settings/exclude",
+	ProjectVariable.create_setting("manager/settings/settings/exclude",
 		TYPE_PACKED_STRING_ARRAY,
 		PackedStringArray(["input/ui_"]))
-	ProjectVariable.create_setting(
-		"manager/settings/game_data/directory",
+	ProjectVariable.create_setting("manager/settings/game_data/directory",
 		TYPE_STRING,
 		"user://savefile.cfg")
-	ProjectVariable.create_setting(
-		"manager/settings/game_data/include",
+	ProjectVariable.create_setting("manager/settings/game_data/include",
 		TYPE_PACKED_STRING_ARRAY,
 		PackedStringArray(["game_data/"]))
-	ProjectVariable.create_setting(
-		"manager/settings/game_data/exclude",
+	ProjectVariable.create_setting("manager/settings/game_data/exclude",
 		TYPE_PACKED_STRING_ARRAY,
 		PackedStringArray([]))
 	
 	# VOLUME
-	ProjectVariable.create_setting(
-		"custom/audio/master/normalized_volume",
+	ProjectVariable.create_setting("custom/audio/master/volume_normalized",
 		TYPE_FLOAT,
 		0.8)
-	ProjectVariable.create_setting(
-		"custom/audio/sfx/normalized_volume",
+	ProjectVariable.create_setting("custom/audio/sfx/volume_normalized",
 		TYPE_FLOAT,
 		0.8)
-	ProjectVariable.create_setting(
-		"custom/audio/music/normalized_volume",
+	ProjectVariable.create_setting("custom/audio/music/volume_normalized",
 		TYPE_FLOAT,
 		0.8)
+	
 	
 	ManagerSettings._save_project_settings(
 		"res://settings.cfg",
