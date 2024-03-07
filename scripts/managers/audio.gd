@@ -56,7 +56,7 @@ func _set_next(track:AudioStream, fade_out:float=1.0, inbetween_tracks:float=0.0
 		if(track!=_track): _set_track_current(track)
 	else:
 		if(track!=_track): _player.connect(&"fade_end", Callable(self, &"_set_track_current").bind(track), CONNECT_ONE_SHOT)
-		_track.fade_out_in(fade_out, inbetween_tracks, fade_in)
+		_player.fade_out_in(fade_out, inbetween_tracks, fade_in)
 
 var music_layers:Array[AudioStream] = [null,null,null]
 func _update_track(fade_out:float=1.0, inbetween_tracks:float=0.0, fade_in:float=0.0)->void:
