@@ -40,7 +40,7 @@ func _fade(
 		_:
 			var current_volume_normalized:float = get_volume_normalized()
 			var t:Tween = get_tree().create_tween().bind_node(self)
-			t.interpolate_method(self, &"set_volume_normalized", current_volume_normalized, target_volume_normalized, time)
+			t.tween_method(Callable(self, &"set_volume_normalized"), current_volume_normalized, target_volume_normalized, time)
 			t.connect(&"tween_all_completed", Callable(self, &"emit_signal").bind([&"fade_end", target_volume_normalized]))
 			t.connect(&"tween_all_completed", Callable(t, &"queue_free"))
 			emit_signal(&"fade_start", current_volume_normalized)
