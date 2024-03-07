@@ -16,7 +16,7 @@ func _init():
 static func _on_project_settings_update():
 	if(ProjectSettings.has_setting("custom/audio/master/volume_normalized")):
 		set_bus_volume_normalized(
-			AudioServer.get_bus_index(&"master"),
+			AudioServer.get_bus_index(&"Master"),
 			ProjectSettings.get_setting("custom/audio/master/volume_normalized")
 		)
 	if(ProjectSettings.has_setting("custom/audio/sfx/volume_normalized")):
