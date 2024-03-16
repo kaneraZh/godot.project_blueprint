@@ -18,8 +18,8 @@ func setup(
 	on_release:int,
 	active:=true):
 		signals = 0
-		signals+= 0<<(on_release&1)
-		signals+= 1<<(on_press	&1)
+		signals+= (on_release&1)<<0
+		signals+= (on_press&1)<<1
 		set_active(active)
 var last:int = 0
 func press()->float:
