@@ -4,10 +4,10 @@ extends InputRaw
 @export_flags("on press","on release") var signals:int = 0b00
 func set_on_press(f:bool):
 	signals = (signals&(~(1<<0)))+((int(f)&1)<<0)
-	set_check_every_frame(f)
+	set_check_every_frame( bool(signals) )
 func set_on_release(f:bool):
 	signals = (signals&(~(1<<1)))+((int(f)&1)<<1)
-	set_check_every_frame(f)
+	set_check_every_frame( bool(signals) )
 func get_on_press()->bool:	return bool( (signals>>0)&1 )
 func get_on_release()->bool:return bool( (signals>>1)&1 )
 signal just_pressed
