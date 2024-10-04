@@ -14,7 +14,3 @@
 	path = addons/button_based_menus
 	url = git@git.gay:kaneraZh/button_based_menus.git
 	branch = latest
-[submodule "addons/callable_resource"]
-	path = addons/callable_resource
-	url = git@git.gay:kaneraZh/callable_resource.git
-	branch = latest
