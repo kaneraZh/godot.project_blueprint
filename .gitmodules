@@ -1,0 +1,20 @@
+[submodule "addons/easy_savefiles"]
+	path = addons/easy_savefiles
+	url = https://git.gay/kaneraZh/easy_savefiles.git
+	branch = latest
+[submodule "addons/popup_resource"]
+	path = addons/popup_resource
+	url = git@git.gay:kaneraZh/popup_resource.git
+	branch = latest
+[submodule "addons/project_settings_control"]
+	path = addons/project_settings_control
+	url = git@git.gay:kaneraZh/project_settings_control.git
+	branch = latest
+[submodule "addons/button_based_menus"]
+	path = addons/button_based_menus
+	url = git@git.gay:kaneraZh/button_based_menus.git
+	branch = latest
+[submodule "addons/callable_resource"]
+	path = addons/callable_resource
+	url = git@git.gay:kaneraZh/callable_resource.git
+	branch = latest
